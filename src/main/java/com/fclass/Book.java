@@ -2,11 +2,12 @@ package com.fclass;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Book {
     @Id
-    int iabn;
+    int id;
     String name;
     String author;
 
@@ -14,16 +15,16 @@ public class Book {
         this.name = name;
     }
 
-    public void setIabn(int iabn) {
-        this.iabn = iabn;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setAuthor(String author) {
         this.author = author;
     }
 
-    public int getIabn(){
-        return iabn;
+    public int getId(){
+        return id;
     }
 
     public String getName(){
@@ -32,5 +33,14 @@ public class Book {
 
     public String getAuthor(){
         return author;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                '}';
     }
 }
