@@ -11,7 +11,7 @@ public class Library {
     int id;
     String name;
     String city;
-    @ManyToMany
+    @ManyToMany(mappedBy = "libraryList")
     List<Book> books;
 
     public String getName() {

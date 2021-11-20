@@ -9,7 +9,9 @@ public class Book {
     int id;
     String name;
     Author author;
-    @ManyToMany(mappedBy = "books")
+    @ManyToOne
+    Publisher publisher;
+    @ManyToMany
     List<Library> libraryList;
 
     public int getId() {
@@ -42,6 +44,14 @@ public class Book {
 
     public void setLibraryList(List<Library> libraryList) {
         this.libraryList = libraryList;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
     }
 
     @Override

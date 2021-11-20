@@ -21,7 +21,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        Configuration conf = new Configuration().configure().addAnnotatedClass(Book.class).addAnnotatedClass(Library.class);
+        Configuration conf = new Configuration().configure().addAnnotatedClass(Book.class).addAnnotatedClass(Library.class).addAnnotatedClass(Publisher.class);
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();
         SessionFactory factory = conf.buildSessionFactory(serviceRegistry);
         Session session = factory.openSession();
@@ -36,6 +36,16 @@ public class App
         herbert.setAuthorName("Frank Herbert");
         herbert.setAuthorAge(100);
         herbert.setBooks(Arrays.asList("herbert book 1", "herbert book 2", "herbert book 3"));
+
+        Publisher oxford = new Publisher();
+//        oxford.setPublisherId(10001);
+        oxford.setPublisherName("Oxford Publishing");
+
+
+
+        Publisher martyn = new Publisher();
+//        martyn.setPublisherId(10002);
+        martyn.setPublisherName("Martyn's Publishing");
 
 
         Book flowers4Algernon = new Book();
@@ -59,11 +69,14 @@ public class App
         queensLib.setName("Queens Public Library");
 
         //setting many to many relations list for library and books
+        oxford.setBooks(Arrays.asList(theStranger));
+        martyn.setBooks(Arrays.asList(flowers4Algernon));
         theStranger.setLibraryList(Arrays.asList(nyLib,queensLib ));
+        theStranger.setPublisher(oxford);
+        flowers4Algernon.setPublisher(martyn);
         flowers4Algernon.setLibraryList(Arrays.asList(nyLib,queensLib ));
         nyLib.setBooks(Arrays.asList(flowers4Algernon, theStranger));
         queensLib.setBooks(Arrays.asList(flowers4Algernon, theStranger));
-
 
 //        Book raffay_book = new Book();
 
@@ -72,6 +85,8 @@ public class App
         session.save(theStranger);
         session.save(nyLib);
         session.save(queensLib);
+        session.save(oxford);
+        session.save(martyn);
 //        raffay_book = session.get(Book.class , 0);
         tx.commit();
 
