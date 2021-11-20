@@ -1,9 +1,7 @@
 package com.fclass;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Book {
@@ -11,6 +9,8 @@ public class Book {
     int id;
     String name;
     Author author;
+    @ManyToMany(mappedBy = "books")
+    List<Library> libraryList;
 
     public int getId() {
         return id;
@@ -36,12 +36,22 @@ public class Book {
         this.author = author;
     }
 
+    public List<Library> getLibraryList() {
+        return libraryList;
+    }
+
+    public void setLibraryList(List<Library> libraryList) {
+        this.libraryList = libraryList;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", author=" + author +
+                ", libraryList=" + libraryList +
                 '}';
     }
+
 }
