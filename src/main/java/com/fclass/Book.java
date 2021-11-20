@@ -1,5 +1,6 @@
 package com.fclass;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
@@ -9,30 +10,30 @@ public class Book {
     @Id
     int id;
     String name;
-    String author;
+    Author author;
 
-    public void setName(String name) {
-        this.name = name;
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public int getId(){
-        return id;
-    }
-
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public String getAuthor(){
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Author getAuthor() {
         return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     @Override
@@ -40,7 +41,7 @@ public class Book {
         return "Book{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", author='" + author + '\'' +
+                ", author=" + author +
                 '}';
     }
 }
