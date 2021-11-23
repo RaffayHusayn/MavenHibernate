@@ -8,10 +8,11 @@ public class Book {
     @Id
     int id;
     String name;
+    @Embedded
     Author author;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     Publisher publisher;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     List<Library> libraryList;
 
     public int getId() {

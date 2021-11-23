@@ -81,12 +81,12 @@ public class App
 //        Book raffay_book = new Book();
 
         Transaction tx = session.beginTransaction();
-        session.save(flowers4Algernon);
-        session.save(theStranger);
-        session.save(nyLib);
-        session.save(queensLib);
-        session.save(oxford);
-        session.save(martyn);
+        session.persist(flowers4Algernon);
+        session.persist(theStranger);
+//        session.save(nyLib);
+//        session.save(queensLib);
+//        session.save(oxford);
+//        session.save(martyn);
 //        raffay_book = session.get(Book.class , 0);
         tx.commit();
 

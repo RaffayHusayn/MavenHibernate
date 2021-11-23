@@ -33,6 +33,9 @@
         <property name ="hibernate.hbm2ddl.auto">create-drop</property>
 
         <property name="show_sql">true</property>
+
+
+
     </session-factory>
 
 </hibernate-configuration>
