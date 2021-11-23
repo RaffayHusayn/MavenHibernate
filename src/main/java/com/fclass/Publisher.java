@@ -9,7 +9,7 @@ public class Publisher {
     @GeneratedValue(strategy= GenerationType.AUTO)
     int publisherId;
     String publisherName;
-    @OneToMany(mappedBy = "publisher")
+    @OneToMany(mappedBy = "publisher", fetch = FetchType.EAGER)
     List<Book> books;
 
     public int getPublisherId() {

@@ -9,6 +9,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,6 +38,12 @@ public class App
         herbert.setAuthorAge(100);
         herbert.setBooks(Arrays.asList("herbert book 1", "herbert book 2", "herbert book 3"));
 
+        Author camus = new Author();
+        camus.setAuthorName("Albert Camus");
+        camus.setAuthorAge(101);
+        camus.setBooks(Arrays.asList("camus book 1", "camus book 2", "camus book 3"));
+
+
         Publisher oxford = new Publisher();
 //        oxford.setPublisherId(10001);
         oxford.setPublisherName("Oxford Publishing");
@@ -52,6 +59,11 @@ public class App
         flowers4Algernon.setAuthor(raffay);
         flowers4Algernon.setId(0);
         flowers4Algernon.setName("Flowers for Algernon");
+
+        Book hitchhiker  = new Book();
+        hitchhiker.setAuthor(camus);
+        hitchhiker.setId(10);
+        hitchhiker.setName("Hitchhiker's Guide to the Galaxy");
 
         Book theStranger = new Book();
         theStranger.setAuthor(herbert);
@@ -69,34 +81,40 @@ public class App
         queensLib.setName("Queens Public Library");
 
         //setting many to many relations list for library and books
-        oxford.setBooks(Arrays.asList(theStranger));
-        martyn.setBooks(Arrays.asList(flowers4Algernon));
+        oxford.setBooks(Arrays.asList(flowers4Algernon));
+        martyn.setBooks(Arrays.asList(flowers4Algernon, theStranger));
         theStranger.setLibraryList(Arrays.asList(nyLib,queensLib ));
-        theStranger.setPublisher(oxford);
+        theStranger.setPublisher(martyn);
+        hitchhiker.setPublisher(oxford);
+        hitchhiker.setLibraryList(Arrays.asList(nyLib));
         flowers4Algernon.setPublisher(martyn);
         flowers4Algernon.setLibraryList(Arrays.asList(nyLib,queensLib ));
         nyLib.setBooks(Arrays.asList(flowers4Algernon, theStranger));
         queensLib.setBooks(Arrays.asList(flowers4Algernon, theStranger));
 
-//        Book raffay_book = new Book();
 
-        Transaction tx = session.beginTransaction();
-        session.persist(flowers4Algernon);
-        session.persist(theStranger);
-//        session.save(nyLib);
-//        session.save(queensLib);
-//        session.save(oxford);
-//        session.save(martyn);
-//        raffay_book = session.get(Book.class , 0);
-        tx.commit();
+//        Transaction tx = session.beginTransaction();
+//        session.persist(flowers4Algernon);
+//        session.persist(theStranger);
+//        session.persist(hitchhiker);
+//        tx.commit();
 
 
-//        Transaction tx1 = session.beginTransaction();
-//        tx1.commit();
+        Transaction tx1 = session.beginTransaction();
+        Book bookRetrieved = session.get(Book.class,5);
+        System.out.println(bookRetrieved.getName());
+        Publisher publisherRetrieved = session.get(Publisher.class, 2);
+        List<Book> publisherBooks = publisherRetrieved.getBooks();
+        for(Book b: publisherBooks){
+            System.out.println(b.getName());
+        }
 
-//        System.out.println(raffay_book);
+//        System.out.println(bookRetrieved.getLibraryList());
+        tx1.commit();
 
 
+
+//
 
     }
 }
