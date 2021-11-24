@@ -1,15 +1,20 @@
 package com.fclass;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Publisher {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     int publisherId;
     String publisherName;
     @OneToMany(mappedBy = "publisher")
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     List<Book> books;
 
     public int getPublisherId() {

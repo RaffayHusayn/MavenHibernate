@@ -22,10 +22,19 @@ public class App
 {
     public static void main( String[] args )
     {
-        Configuration conf = new Configuration().configure().addAnnotatedClass(Book.class).addAnnotatedClass(Library.class).addAnnotatedClass(Publisher.class);
+        Configuration conf = new Configuration().configure().addAnnotatedClass(Book.class).addAnnotatedClass(Library.class).addAnnotatedClass(Publisher.class).addAnnotatedClass(Borrower.class);
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();
         SessionFactory factory = conf.buildSessionFactory(serviceRegistry);
         Session session = factory.openSession();
+
+        Borrower borrower1 = new Borrower();
+        borrower1.setName("anil kapoor");
+        borrower1.setAge(54);
+
+        Borrower borrower2 = new Borrower();
+        borrower2.setName("prem chopra");
+        borrower2.setAge(100);
+
 
         Author raffay = new Author();
         raffay.setAuthorName("Raffay");
@@ -94,20 +103,31 @@ public class App
 
 
         Transaction tx = session.beginTransaction();
-        session.persist(flowers4Algernon);
-        session.persist(theStranger);
-        session.persist(hitchhiker);
+//        session.persist(flowers4Algernon);
+//        session.persist(theStranger);
+//        session.persist(hitchhiker);
+//        session.persist(borrower1);
+//        session.persist(borrower2);
+//
+//        Borrower b = session.get(Borrower.class , 3);
+//        System.out.println(b.getName());
+        Book book2Retrieved = session.get(Book.class,5);
+        System.out.println(book2Retrieved.getName());
         tx.commit();
+        session.close();
 
-        Transaction tx1 = session.beginTransaction();
-        Book bookRetrieved = session.get(Book.class,5);
+        Session session2 = factory.openSession();
+        Transaction tx2 = session2.beginTransaction();
+//        Borrower b1 = session2.get(Borrower.class , 3);
+//        System.out.println(b1.getName());
+        Book bookRetrieved = session2.get(Book.class,5);
         System.out.println(bookRetrieved.getName());
-        Library libraryRetrieved = session.get(Library.class,1001 );
-        System.out.println(libraryRetrieved.getName());
-        List<Book> libraryBooks = libraryRetrieved.getBooks();
-        for(Book b:libraryBooks){
-            System.out.println(b.getName());
-        }
+//        Library libraryRetrieved = session2.get(Library.class,1001 );
+//        System.out.println(libraryRetrieved.getName());
+//        List<Book> libraryBooks = libraryRetrieved.getBooks();
+//        for(Book b:libraryBooks){
+//            System.out.println(b.getName());
+//        }
 
 //        Publisher publisherRetrieved = session.get(Publisher.class, 2);
 //        List<Book> publisherBooks = publisherRetrieved.getBooks();
@@ -123,8 +143,9 @@ public class App
 //        for(Book b:libraryBooks){
 //            System.out.println(b.getName());
 //        }
-//
-//        tx1.commit();
+////
+        tx2.commit();
+        session2.close();
 
 
 

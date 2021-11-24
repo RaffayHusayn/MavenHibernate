@@ -1,9 +1,13 @@
 package com.fclass;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Cache;
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Book {
     @Id
     int id;
@@ -13,6 +17,7 @@ public class Book {
     @ManyToOne(cascade = CascadeType.ALL)
     Publisher publisher;
     @ManyToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     List<Library> libraryList;
 
     public int getId() {
