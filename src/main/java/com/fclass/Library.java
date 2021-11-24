@@ -1,6 +1,7 @@
 package com.fclass;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.util.List;
@@ -11,7 +12,7 @@ public class Library {
     int id;
     String name;
     String city;
-    @ManyToMany(mappedBy = "libraryList")
+    @ManyToMany(mappedBy = "libraryList", fetch = FetchType.EAGER)
     List<Book> books;
 
     public String getName() {

@@ -12,7 +12,7 @@ public class Book {
     Author author;
     @ManyToOne(cascade = {CascadeType.ALL})
     Publisher publisher;
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL} , fetch = FetchType.EAGER)
     List<Library> libraryList;
 
     public int getId() {

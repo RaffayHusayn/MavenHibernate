@@ -103,11 +103,18 @@ public class App
         Transaction tx1 = session.beginTransaction();
         Book bookRetrieved = session.get(Book.class,5);
         System.out.println(bookRetrieved.getName());
-        Publisher publisherRetrieved = session.get(Publisher.class, 2);
-        List<Book> publisherBooks = publisherRetrieved.getBooks();
-        for(Book b: publisherBooks){
+        Library libraryRetrieved = session.get(Library.class,1001 );
+        System.out.println(libraryRetrieved.getName());
+        List<Book> libraryBooks = libraryRetrieved.getBooks();
+        for(Book b:libraryBooks){
             System.out.println(b.getName());
         }
+
+//        Publisher publisherRetrieved = session.get(Publisher.class, 2);
+//        List<Book> publisherBooks = publisherRetrieved.getBooks();
+//        for(Book b: publisherBooks){
+//            System.out.println(b.getName());
+//        }
 
 //        System.out.println(bookRetrieved.getLibraryList());
         tx1.commit();
