@@ -37,6 +37,23 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.27</version>
     </dependency>
+      <!-- for second level cache: external dependency -->
+      <dependency>
+        <groupId>org.ehcache</groupId>
+        <artifactId>ehcache</artifactId>
+        <version>3.9.7</version>
+      </dependency>
+      <!-- to provide an interface between eh cache and hibernate orm -->
+      <dependency>
+        <groupId>org.hibernate.orm</groupId>
+        <artifactId>hibernate-ehcache</artifactId>
+        <version>6.0.0.Alpha7</version>
+      </dependency>
+
+
+
+
+
 
 
 

@@ -93,12 +93,11 @@ public class App
         queensLib.setBooks(Arrays.asList(flowers4Algernon, theStranger));
 
 
-//        Transaction tx = session.beginTransaction();
-//        session.persist(flowers4Algernon);
-//        session.persist(theStranger);
-//        session.persist(hitchhiker);
-//        tx.commit();
-
+        Transaction tx = session.beginTransaction();
+        session.persist(flowers4Algernon);
+        session.persist(theStranger);
+        session.persist(hitchhiker);
+        tx.commit();
 
         Transaction tx1 = session.beginTransaction();
         Book bookRetrieved = session.get(Book.class,5);
@@ -113,11 +112,19 @@ public class App
 //        Publisher publisherRetrieved = session.get(Publisher.class, 2);
 //        List<Book> publisherBooks = publisherRetrieved.getBooks();
 //        for(Book b: publisherBooks){
+
+//
+//        Transaction tx1 = session.beginTransaction();
+//        Book bookRetrieved = session.get(Book.class,5);
+//        System.out.println(bookRetrieved.getName());
+//        Library libraryRetrieved = session.get(Library.class,1001 );
+//        System.out.println(libraryRetrieved.getName());
+//        List<Book> libraryBooks = libraryRetrieved.getBooks();
+//        for(Book b:libraryBooks){
 //            System.out.println(b.getName());
 //        }
-
-//        System.out.println(bookRetrieved.getLibraryList());
-        tx1.commit();
+//
+//        tx1.commit();
 
 
 

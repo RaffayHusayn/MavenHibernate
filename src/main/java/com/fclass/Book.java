@@ -10,9 +10,9 @@ public class Book {
     String name;
     @Embedded
     Author author;
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = CascadeType.ALL)
     Publisher publisher;
-    @ManyToMany(cascade = {CascadeType.ALL} , fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     List<Library> libraryList;
 
     public int getId() {
