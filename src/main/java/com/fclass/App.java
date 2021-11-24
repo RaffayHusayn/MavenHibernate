@@ -7,6 +7,7 @@ import org.hibernate.boot.registry.BootstrapServiceRegistryBuilder;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
 
 import java.sql.SQLOutput;
@@ -111,17 +112,25 @@ public class App
 //
 //        Borrower b = session.get(Borrower.class , 3);
 //        System.out.println(b.getName());
-        Book book2Retrieved = session.get(Book.class,5);
-        System.out.println(book2Retrieved.getName());
+//        Book book2Retrieved = session.get(Book.class,5);
+//        System.out.println(book2Retrieved.getName());
+        Query q1 = session.createQuery("from Borrower where id = 4");
+        q1.setCacheable(true);
+        Borrower b1 = (Borrower) q1.uniqueResult();
+        System.out.println(b1.getName());
         tx.commit();
         session.close();
 
         Session session2 = factory.openSession();
         Transaction tx2 = session2.beginTransaction();
+        Query q2 = session2.createQuery("from Borrower where id = 4");
+        q2.setCacheable(true);
+        Borrower b2 = (Borrower) q2.uniqueResult();
+        System.out.println(b2.getName());
 //        Borrower b1 = session2.get(Borrower.class , 3);
 //        System.out.println(b1.getName());
-        Book bookRetrieved = session2.get(Book.class,5);
-        System.out.println(bookRetrieved.getName());
+//        Book bookRetrieved = session2.get(Book.class,5);
+//        System.out.println(bookRetrieved.getName());
 //        Library libraryRetrieved = session2.get(Library.class,1001 );
 //        System.out.println(libraryRetrieved.getName());
 //        List<Book> libraryBooks = libraryRetrieved.getBooks();
