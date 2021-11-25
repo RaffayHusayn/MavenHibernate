@@ -114,7 +114,6 @@ public class App
         System.out.println("================Query 1================");
         Query q1 = session.createQuery("select name from Borrower b where b.id = 45 ");
         Object borrowers = (Object) q1.uniqueResult();
-
         System.out.println(borrowers);
 
 
@@ -123,7 +122,6 @@ public class App
         System.out.println("=============Query 2==============");
         Query q2 = session.createQuery("Select name, age  from Borrower b where b.id = 46");
         Object[] multipleFields = (Object[] )q2.uniqueResult();
-
         System.out.println("Name : "+ multipleFields[0] + " Age : "+ multipleFields[1]);
 
         // 3. Getting multiple fields of multiple partial objects of Borrower Class
@@ -148,6 +146,11 @@ public class App
             System.out.println(b);
         }
 
+        //6. Applying Aggregation Functions on multiple objects of Borrower Class
+        System.out.println("===================Query 6======================");
+        Query q6 = session.createQuery("select count(age) from Borrower where age > 60");
+        Long retiredCount = (Long)q6.uniqueResult();
+        System.out.println(retiredCount);
 
 //        session.persist(flowers4Algernon);
 //        session.persist(theStranger);
