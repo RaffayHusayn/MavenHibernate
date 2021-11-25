@@ -14,6 +14,7 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Hello world!
@@ -104,6 +105,29 @@ public class App
 
 
         Transaction tx = session.beginTransaction();
+
+        Random r = new Random();
+
+        //------------------HQL------------------
+        for(int i=0 ; i<50 ; i++){
+            Borrower b = new Borrower();
+            b.setName("borrowerName" + i);
+            b.setAge(r.nextInt(100));
+            session.persist(b);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 //        session.persist(flowers4Algernon);
 //        session.persist(theStranger);
 //        session.persist(hitchhiker);
@@ -114,19 +138,19 @@ public class App
 //        System.out.println(b.getName());
 //        Book book2Retrieved = session.get(Book.class,5);
 //        System.out.println(book2Retrieved.getName());
-        Query q1 = session.createQuery("from Borrower where id = 4");
-        q1.setCacheable(true);
-        Borrower b1 = (Borrower) q1.uniqueResult();
-        System.out.println(b1.getName());
+//        Query q1 = session.createQuery("from Borrower where id = 4");
+//        q1.setCacheable(true);
+//        Borrower b1 = (Borrower) q1.uniqueResult();
+//        System.out.println(b1.getName());
         tx.commit();
         session.close();
-
-        Session session2 = factory.openSession();
-        Transaction tx2 = session2.beginTransaction();
-        Query q2 = session2.createQuery("from Borrower where id = 4");
-        q2.setCacheable(true);
-        Borrower b2 = (Borrower) q2.uniqueResult();
-        System.out.println(b2.getName());
+//
+//        Session session2 = factory.openSession();
+//        Transaction tx2 = session2.beginTransaction();
+//        Query q2 = session2.createQuery("from Borrower where id = 4");
+//        q2.setCacheable(true);
+//        Borrower b2 = (Borrower) q2.uniqueResult();
+//        System.out.println(b2.getName());
 //        Borrower b1 = session2.get(Borrower.class , 3);
 //        System.out.println(b1.getName());
 //        Book bookRetrieved = session2.get(Book.class,5);
@@ -153,8 +177,8 @@ public class App
 //            System.out.println(b.getName());
 //        }
 ////
-        tx2.commit();
-        session2.close();
+//        tx2.commit();
+//        session2.close();
 
 
 
