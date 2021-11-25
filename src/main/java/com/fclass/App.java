@@ -106,18 +106,16 @@ public class App
 
         Transaction tx = session.beginTransaction();
 
-        Random r = new Random();
+
 
         //------------------HQL------------------
-        for(int i=0 ; i<50 ; i++){
-            Borrower b = new Borrower();
-            b.setName("borrowerName" + i);
-            b.setAge(r.nextInt(100));
-            session.persist(b);
 
+
+        Query q1 = session.createQuery("from Borrower");
+        List<Borrower> borrowers= q1.list();
+        for(Borrower b: borrowers){
+            System.out.println("Name : " + b.getName() +  " Age : "+ b.getAge());
         }
-
-
 
 
 
