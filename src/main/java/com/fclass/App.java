@@ -108,22 +108,45 @@ public class App
 
 
 
-        //------------------HQL------------------
+        //------------------HQL------------------ //
+
+        // 1. Getting one field of one partial object of Borrower Class
+        System.out.println("================Query 1================");
+        Query q1 = session.createQuery("select name from Borrower b where b.id = 45 ");
+        Object borrowers = (Object) q1.uniqueResult();
+
+        System.out.println(borrowers);
 
 
-        Query q1 = session.createQuery("from Borrower");
-        List<Borrower> borrowers= q1.list();
-        for(Borrower b: borrowers){
-            System.out.println("Name : " + b.getName() +  " Age : "+ b.getAge());
+
+        // 2. Getting multiple fields of one partial object of Borrower Class
+        System.out.println("=============Query 2==============");
+        Query q2 = session.createQuery("Select name, age  from Borrower b where b.id = 46");
+        Object[] multipleFields = (Object[] )q2.uniqueResult();
+
+        System.out.println("Name : "+ multipleFields[0] + " Age : "+ multipleFields[1]);
+
+        // 3. Getting multiple fields of multiple partial objects of Borrower Class
+        System.out.println("=============Query 3==============");
+        Query q3 = session.createQuery("Select name, age from Borrower b where b.id > 47 ");
+        List<Object[]> multipleObjects = (List<Object[]>) q3.list();
+        for (Object[] m: multipleObjects){
+            System.out.println("Name : "+ m[0] + " Age : "+ m[1]);
         }
 
+        //4. Getting single Complete Object of class Borrower Class
+        System.out.println("=============Query 4==================");
+        Query q4 = session.createQuery("from Borrower b where b.id  =34");
+        Borrower singleBorrower = (Borrower)q4.uniqueResult();
+        System.out.println(singleBorrower);
 
-
-
-
-
-
-
+        //5. Getting multiple Complete Object of Borrower Class
+        System.out.println("===================Query 5===================");
+        Query q5 = session.createQuery("from Borrower b where b.id < 5");
+        List<Borrower> multipleBorrower = (List<Borrower>)q5.list();
+        for(Borrower b : multipleBorrower){
+            System.out.println(b);
+        }
 
 
 //        session.persist(flowers4Algernon);
